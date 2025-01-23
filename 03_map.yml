@@ -1,0 +1,35 @@
+---
+- name: Demonstrate map filter
+  hosts: localhost
+  vars_files:
+    - vars.yml
+  tasks:
+    - name: Extract names using map
+      ansible.builtin.debug:
+        msg: "Names: {{ sample_list | map(attribute='name') | list }}"
+      # Output: Names: ['item1', 'item2', 'item3']
+
+    - name: Extract values using map
+      ansible.builtin.debug:
+        msg: "Values: {{ sample_list | map(attribute='value') | list }}"
+      # Output: Values: [100, 200, 300]
+
+    - name: Map with custom function (multiply by 2)
+      ansible.builtin.debug:
+        msg: "Doubled values: {{ simple_list | map('regex_replace', '^(.*)$', '\\1\\1') | list }}"
+      # Output: Doubled values: ['appleapple', 'bananabanana', 'cherrycherry']
+
+    - name: Map with batch filter
+      ansible.builtin.debug:
+        msg: "Batched list: {{ simple_list | map('batch', 2) | list }}"
+      # Output: Batched list: [['apple', 'banana'], ['cherry']]
+
+    - name: Map with default filter
+      ansible.builtin.debug:
+        msg: "With defaults: {{ sample_list | map(attribute='optional_field', default='N/A') | list }}"
+      # Output: With defaults: ['N/A', 'N/A', 'N/A']
+
+    - name: Map with string operations
+      ansible.builtin.debug:
+        msg: "Uppercase: {{ simple_list | map('upper') | list }}"
+      # Output: Uppercase: ['APPLE', 'BANANA', 'CHERRY'] 

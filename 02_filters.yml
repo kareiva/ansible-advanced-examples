@@ -1,0 +1,20 @@
+---
+- name: Demonstrate variable filters
+  hosts: localhost
+  vars_files:
+    - vars.yml
+  tasks:
+    - name: Upper filter
+      ansible.builtin.debug:
+        msg: "{{ simple_list | upper }}"
+      # Output: ['APPLE', 'BANANA', 'CHERRY']
+
+    - name: Join filter
+      ansible.builtin.debug:
+        msg: "{{ simple_list | join(', ') }}"
+      # Output: apple, banana, cherry
+
+    - name: Length filter
+      ansible.builtin.debug:
+        msg: "List length: {{ sample_list | length }}"
+      # Output: List length: 3 

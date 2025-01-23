@@ -1,0 +1,23 @@
+sample_list:
+  - name: item1
+    value: 100
+    enabled: true
+  - name: item2
+    value: 200
+    enabled: false
+  - name: item3
+    value: 300
+    enabled: true
+
+sample_dict:
+  key1:
+    desc: "First item"
+    value: 10
+  key2:
+    desc: "Second item"
+    value: 20
+  key3:
+    desc: "Third item"
+    value: 30
+
+simple_list: ["apple", "banana", "cherry"] 

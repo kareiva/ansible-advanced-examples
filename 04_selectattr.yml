@@ -1,0 +1,15 @@
+---
+- name: Demonstrate selectattr filter
+  hosts: localhost
+  vars_files:
+    - vars.yml
+  tasks:
+    - name: Select enabled items
+      ansible.builtin.debug:
+        msg: "Enabled items: {{ sample_list | selectattr('enabled', 'true') | list }}"
+      # Output: Enabled items: [{"name": "item1", "value": 100, "enabled": true}, {"name": "item3", "value": 300, "enabled": true}]
+
+    - name: Select items with value greater than 150
+      ansible.builtin.debug:
+        msg: "High value items: {{ sample_list | selectattr('value', '>', 150) | list }}"
+      # Output: High value items: [{"name": "item2", "value": 200, "enabled": false}, {"name": "item3", "value": 300, "enabled": true}] 
