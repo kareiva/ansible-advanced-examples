@@ -17,4 +17,41 @@
     - name: Length filter
       ansible.builtin.debug:
         msg: "List length: {{ sample_list | length }}"
-      # Output: List length: 3 
+      # Output: List length: 3
+
+    - name: Combine filter - merge dictionaries
+      vars:
+        dict1: { 'a': 1, 'b': 2 }
+        dict2: { 'b': 3, 'c': 4 }
+      ansible.builtin.debug:
+        msg: "Combined dict: {{ dict1 | combine(dict2) }}"
+      # Output: Combined dict: {'a': 1, 'b': 3, 'c': 4}
+
+    - name: Combine filter with recursive merge
+      vars:
+        base_dict: 
+          settings:
+            color: blue
+            size: small
+        override_dict:
+          settings:
+            size: large
+            weight: heavy
+      ansible.builtin.debug:
+        msg: "Recursive combine: {{ base_dict | combine(override_dict, recursive=True) }}"
+      # Output: Recursive combine: {'settings': {'color': 'blue', 'size': 'large', 'weight': 'heavy'}}
+
+    - name: JSON filter
+      ansible.builtin.debug:
+        msg: "{{ sample_dict | to_json }}"
+      # Output: {"key1": {"desc": "First item", "value": 10}, ...}
+
+    - name: YAML filter
+      ansible.builtin.debug:
+        msg: "{{ sample_dict | to_yaml }}"
+      # Output: key1: {desc: First item, value: 10}...
+
+    - name: Default filter
+      ansible.builtin.debug:
+        msg: "{{ undefined_var | default('fallback value') }}"
+      # Output: fallback value 
