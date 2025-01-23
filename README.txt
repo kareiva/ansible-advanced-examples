@@ -5,12 +5,12 @@ A collection of example playbooks demonstrating Ansible filters and loops.
 
 Files:
 ------
-vars.yml         - Sample data structures used across playbooks
-01_loops.yml     - Loop examples (loop, with_items, with_dict)
-02_filters.yml   - Basic variable filters (upper, join, length)
-03_map.yml       - Map filter examples and transformations
+vars.yml          - Sample data structures used across playbooks
+01_loops.yml      - Loop examples (loop, with_items, with_dict)
+02_filters.yml    - Basic variable filters (upper, join, length)
+03_map.yml        - Map filter examples and transformations
 04_selectattr.yml - List filtering based on attributes
-05_combined.yml  - Combined filter examples
+05_combined.yml   - Combined filter examples
 
 Usage:
 ------
@@ -36,3 +36,8 @@ Documentation:
 -------------
 https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_loops.html
 https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_filters.html 
+
+
+Author:
+-------
+Simonas Kareiva <skareiva@redhat.com>
