@@ -30,7 +30,7 @@
 
     - name: Nested loop example 1 - List and dict combination
       ansible.builtin.debug:
-        msg: "Item {{ item.0.name }} has value {{ item.1.value }} from dict {{ item.1.desc }}"
+        msg: "Item {{ item.0.name }} has value {{ item.1.value }} from dict {{ item.1.value.desc }}"
       with_nested:
         - "{{ sample_list }}"
         - "{{ sample_dict | dict2items }}"
@@ -54,10 +54,10 @@
 
     - name: Nested loop example 3 - Using loop instead of with_nested
       ansible.builtin.debug:
-        msg: "Name: {{ item[0].name }}, Dict Key: {{ item[1].key }}"
-      loop: "{{ sample_list | product(sample_dict.keys() | list) | list }}"
-      # Output: Name: item1, Dict Key: key1
-      # Output: Name: item1, Dict Key: key2
-      # Output: Name: item1, Dict Key: key3
-      # Output: Name: item2, Dict Key: key1
+        msg: "Name: {{ item[0].name }}, Dict: {{ item[1] }}"
+      loop: "{{ sample_list | product(sample_dict.keys()) | list }}"
+      # Output: Name: item1, Dict: key1
+      # Output: Name: item1, Dict: key2
+      # Output: Name: item1, Dict: key3
+      # Output: Name: item2, Dict: key1
       # ... and so on 
